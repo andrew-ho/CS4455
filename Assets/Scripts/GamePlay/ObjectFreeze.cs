@@ -32,7 +32,7 @@ public class ObjectFreeze : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+                rb.constraints = RigidbodyConstraints.FreezePosition;
                 stopped = true;
             }
         }

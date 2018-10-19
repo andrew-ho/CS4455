@@ -27,8 +27,8 @@ public class HideMenuPanel : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        InstructionPanel.gameObject.SetActive(false);
+    }
 	
 	// Update is called once per frame
 	void Update () {

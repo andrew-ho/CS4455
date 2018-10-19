@@ -51,16 +51,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\HideMenuPanel.cs" />
      <Compile Include="Assets\PSD Logo Templates\Sample\IconPreview.cs" />
      <Compile Include="Assets\Scripts\GamePlay\EnemyFreeze.cs" />
      <Compile Include="Assets\Scripts\GamePlay\ObjectFreeze.cs" />
      <Compile Include="Assets\Scripts\GamePlay\TimeStop.cs" />
      <Compile Include="Assets\Scripts\Menus\GameExit.cs" />
      <Compile Include="Assets\Scripts\Menus\GameStart.cs" />
+     <Compile Include="Assets\Scripts\Menus\HideMenuPanel.cs" />
      <Compile Include="Assets\Scripts\Menus\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\Menus\SceneStart.cs" />
-     <Compile Include="Assets\toggleMenuPanel.cs" />
+     <Compile Include="Assets\Scripts\Menus\toggleMenuPanel.cs" />
      <None Include="Assets\PSD Logo Templates\Fonts\Baloo\OFL.txt" />
      <None Include="Assets\PSD Logo Templates\Fonts\Passion_One\OFL.txt" />
      <None Include="Assets\PSD Logo Templates\Fonts\Changa_One\OFL.txt" />

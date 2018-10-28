@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 15
-  productGUID: 00000000000000000000000000000000
+  productGUID: 541aae557deffd94888cabe11e98fa67
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -623,7 +623,7 @@ PlayerSettings:
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
   cloudProjectId: be20b6d9-1984-46da-8eeb-793403ce60b1
-  projectName: 
+  projectName: VGDevProjectClass
   organizationId: ravenous
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0

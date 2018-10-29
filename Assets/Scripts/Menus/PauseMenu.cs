@@ -21,8 +21,7 @@ public class PauseMenu : MonoBehaviour
         {
             if (canvasGroup.interactable)
             {
-
-                Debug.Log("s"); 
+                Cursor.lockState = CursorLockMode.Locked;
                 canvasGroup.interactable = false;
                 canvasGroup.blocksRaycasts = false; 
                 canvasGroup.alpha = 0f;
@@ -30,8 +29,6 @@ public class PauseMenu : MonoBehaviour
             }   
             else
             {
-                Debug.Log("a");
-
                 Cursor.lockState = CursorLockMode.None;
                 canvasGroup.interactable = true; 
                 canvasGroup.blocksRaycasts = true; 

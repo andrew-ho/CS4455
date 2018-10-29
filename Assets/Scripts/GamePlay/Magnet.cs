@@ -22,13 +22,12 @@ public class Magnet : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (isHolding)
+        if (isHolding)
         {
             item.GetComponent<Rigidbody>().velocity = Vector3.zero;
             item.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             item.transform.SetParent(tempParent.transform);
-            //item.transform.position = Vector3.Lerp(item.transform.position,
-            //tempParent.transform.position + tempParent.transform.forward * dis, Time.deltaTime * smooth);
+            item.GetComponent<Rigidbody>().useGravity = false;
         }
         else
         {
@@ -39,7 +38,6 @@ public class Magnet : MonoBehaviour {
 	}
     void carrying(GameObject o)
     {
-        //Debug.Log("Boo");
         if (o != null)
         {
             Rigidbody rb = o.GetComponent<Rigidbody>();
@@ -56,14 +54,17 @@ public class Magnet : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        isHolding = true;
-        item.GetComponent<Rigidbody>().useGravity = false;
-        item.GetComponent<Rigidbody>().detectCollisions = true;
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            isHolding = true;
+            item.GetComponent<Rigidbody>().useGravity = false;
+            item.GetComponent<Rigidbody>().detectCollisions = true;
+        }
     }
-    private void OnMouseUp()
+    /*private void OnMouseUp()
     {
         isHolding = false;
-    }
+    }*/
     /*void pickup()
     {
 

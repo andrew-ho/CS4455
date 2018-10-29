@@ -61,12 +61,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Camera\Editor\v3rdPersonCameraEditor.cs" />
-    <Compile Include="Assets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterController\Editor\vCharacterEditor.cs" />
-    <Compile Include="Assets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterController\Editor\vThirdPersonInputEditor.cs" />
-    <Compile Include="Assets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterCreator\Script\Editor\vCreateBasicCharacterEditor.cs" />
-    <Compile Include="Assets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterCreator\Script\Editor\vHelperEditor.cs" />
-    <Compile Include="Assets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Generic\Editor\vEditorHelper.cs" />
+    <Compile Include="Assets\AssetStoreAssets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Camera\Editor\v3rdPersonCameraEditor.cs" />
+    <Compile Include="Assets\AssetStoreAssets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterController\Editor\vCharacterEditor.cs" />
+    <Compile Include="Assets\AssetStoreAssets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterController\Editor\vThirdPersonInputEditor.cs" />
+    <Compile Include="Assets\AssetStoreAssets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterCreator\Script\Editor\vCreateBasicCharacterEditor.cs" />
+    <Compile Include="Assets\AssetStoreAssets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterCreator\Script\Editor\vHelperEditor.cs" />
+    <Compile Include="Assets\AssetStoreAssets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Generic\Editor\vEditorHelper.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>G:/cs4455/CS4455/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
@@ -78,6 +78,9 @@
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>G:/cs4455/CS4455/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>G:/cs4455/CS4455/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>G:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

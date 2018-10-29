@@ -61,20 +61,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Camera\vThirdPersonCamera.cs" />
-    <Compile Include="Assets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterController\vThirdPersonAnimator.cs" />
-    <Compile Include="Assets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterController\vThirdPersonController.cs" />
-    <Compile Include="Assets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterController\vThirdPersonInput.cs" />
-    <Compile Include="Assets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterController\vThirdPersonMotor.cs" />
-    <Compile Include="Assets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Generic\vComment.cs" />
-    <Compile Include="Assets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Generic\vDestroyGameObject.cs" />
-    <Compile Include="Assets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Generic\vExtensions.cs" />
-    <Compile Include="Assets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Generic\vPickupItem.cs" />
+    <Compile Include="Assets\AssetStoreAssets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Camera\vThirdPersonCamera.cs" />
+    <Compile Include="Assets\AssetStoreAssets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterController\vThirdPersonAnimator.cs" />
+    <Compile Include="Assets\AssetStoreAssets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterController\vThirdPersonController.cs" />
+    <Compile Include="Assets\AssetStoreAssets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterController\vThirdPersonInput.cs" />
+    <Compile Include="Assets\AssetStoreAssets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterController\vThirdPersonMotor.cs" />
+    <Compile Include="Assets\AssetStoreAssets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Generic\vComment.cs" />
+    <Compile Include="Assets\AssetStoreAssets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Generic\vDestroyGameObject.cs" />
+    <Compile Include="Assets\AssetStoreAssets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Generic\vExtensions.cs" />
+    <Compile Include="Assets\AssetStoreAssets\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Generic\vPickupItem.cs" />
     <Compile Include="Assets\PSD Logo Templates\Sample\IconPreview.cs" />
     <Compile Include="Assets\Scripts\EricController.cs" />
     <Compile Include="Assets\Scripts\GamePlay\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\GamePlay\EnemyFreeze.cs" />
+    <Compile Include="Assets\Scripts\GamePlay\Magnet.cs" />
     <Compile Include="Assets\Scripts\GamePlay\ObjectFreeze.cs" />
+    <Compile Include="Assets\Scripts\GamePlay\Pickupable.cs" />
     <Compile Include="Assets\Scripts\GamePlay\PlayerController.cs" />
     <Compile Include="Assets\Scripts\GamePlay\TimeStop.cs" />
     <Compile Include="Assets\Scripts\Menus\GameExit.cs" />
@@ -85,11 +87,11 @@
     <Compile Include="Assets\Scripts\Menus\TimeStart.cs" />
     <Compile Include="Assets\Scripts\Menus\toggleMenuPanel.cs" />
     <None Include="Assets\PSD Logo Templates\Fonts\Baloo\OFL.txt" />
-    <None Include="Assets\Invector-3rdPersonController\Basic Locomotion LITE\README_Basic.txt" />
+    <None Include="Assets\AssetStoreAssets\Invector-3rdPersonController\Basic Locomotion LITE\README_Basic.txt" />
     <None Include="Assets\Props\Info.txt" />
     <None Include="Assets\Idle MoCap\Idle Package Description.txt" />
     <None Include="Assets\PSD Logo Templates\Fonts\Passion_One\OFL.txt" />
-    <None Include="Assets\Barril pack\ReadMe.txt" />
+    <None Include="Assets\AssetStoreAssets\Barril pack\ReadMe.txt" />
     <None Include="Assets\PSD Logo Templates\Fonts\Changa_One\OFL.txt" />
     <None Include="Assets\PSD Logo Templates\Fonts\Lilita_One\OFL.txt" />
     <Reference Include="UnityEditor.StandardEvents">
@@ -103,6 +105,9 @@
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>G:/cs4455/CS4455/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>G:/cs4455/CS4455/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>G:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

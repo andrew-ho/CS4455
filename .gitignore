@@ -14,3 +14,10 @@
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
+
+# Unity auto-generate Visual Studio files
+Assembly-CSharp-Editor.csproj
+Assembly-CSharp-firstpass.csproj
+Assembly-CSharp.csproj
+CS4455.csproj
+CS4455.sln

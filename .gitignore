@@ -11,6 +11,7 @@
 [Oo]bj/
 [Bb]uild/
 .vs/
+Library/
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt

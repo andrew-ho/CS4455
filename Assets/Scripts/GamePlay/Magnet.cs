@@ -7,18 +7,20 @@ public class Magnet : MonoBehaviour {
     float distance;
 
     public bool canHold = true;
-    public GameObject item;
-    public GameObject tempParent;
+    GameObject item;
+    GameObject tempParent;
     public bool isHolding = false;
-    public Camera cam;
+    Camera cam;
     public bool carry;
     public float dis;
     public float smooth;
     public GameObject carriedObject;
     // Use this for initialization
     void Start () {
-		
-	}
+        item = this.gameObject;
+        cam = GameObject.Find("vThirdPersonController").GetComponent<Camera>();
+        tempParent = GameObject.Find("Guide");
+    }
 	
 	// Update is called once per frame
 	void Update () {

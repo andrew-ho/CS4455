@@ -6,8 +6,8 @@ public class PlayerController : MonoBehaviour {
 
     // Use this for initialization
 
-    public Camera cam;
-    public GameObject player;
+    Camera cam;
+    GameObject player;
     GameObject carriedObject;
     public Texture2D crosshairImage;
     void Start () {
@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour {
         float xMin = (Screen.width / 2) - (crosshairImage.width / 2);
         float yMin = (Screen.height / 2) - (crosshairImage.height / 2);
         GUI.DrawTexture(new Rect(xMin, yMin, crosshairImage.width, crosshairImage.height), crosshairImage);
+        cam = GameObject.Find("vThirdPersonController").GetComponent<Camera>();
+        player = GameObject.Find("vThirdPersonCamera");
     }
     // Update is called once per frame
     void Update () {

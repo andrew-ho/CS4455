@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjectFreeze : MonoBehaviour {
     public bool stopped = false;
     public float timer = 0f;
-    public Rigidbody rb;
+    Rigidbody rb;
     public void Stop()
     {
         timer += Time.deltaTime;
@@ -14,6 +14,7 @@ public class ObjectFreeze : MonoBehaviour {
             timer = 0f;
             rb.constraints = RigidbodyConstraints.None;
             stopped = false;
+            PlayerController.frozenObject = null;
         }
     }
     // Use this for initialization
@@ -28,13 +29,13 @@ public class ObjectFreeze : MonoBehaviour {
             Stop();
             return;
         }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                rb.constraints = RigidbodyConstraints.FreezePosition;
-                stopped = true;
-            }
-        }
+        
+    }
+
+    public void StopObject()
+    {
+        rb.constraints = RigidbodyConstraints.FreezePosition;
+        stopped = true;
+        PlayerController.frozenObject = rb.gameObject;
     }
 }

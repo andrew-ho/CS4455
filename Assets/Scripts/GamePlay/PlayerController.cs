@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
     // Use this for initialization
 
@@ -18,10 +19,12 @@ public class PlayerController : MonoBehaviour {
     public enum powerSwitch
     {
         Freeze,
-        Magnesis
+        Magnesis,
+        Push
     };
     public powerSwitch power;
-    void Start () {
+    void Start()
+    {
         power = powerSwitch.Freeze;
         cam = GameObject.Find("vThirdPersonController").GetComponent<Camera>();
         player = GameObject.Find("vThirdPersonCamera");
@@ -32,25 +35,21 @@ public class PlayerController : MonoBehaviour {
         float xMin = (Screen.width / 2) - (crosshairImage.width / 2);
         float yMin = (Screen.height / 2) - (crosshairImage.height / 2);
         GUI.DrawTexture(new Rect(xMin, yMin, crosshairImage.width, crosshairImage.height), crosshairImage);
-        
+
     }
     // Update is called once per frame
-    void Update () {
+    void FixedUpdate()
+    {
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
             currentPower++;
-            
-            if (Mathf.Abs(currentPower) % 2 == 0)
-            {
-                power = powerSwitch.Freeze;
-            }
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
             currentPower--;
-            
+
         }
-        if (Mathf.Abs(currentPower) % 2 == 0)
+        if (Mathf.Abs(currentPower) % 3 == 0)
         {
             power = powerSwitch.Freeze;
             im.sprite = sprites[0];
@@ -60,6 +59,11 @@ public class PlayerController : MonoBehaviour {
             power = powerSwitch.Magnesis;
             im.sprite = sprites[1];
         }
+        else if (Mathf.Abs(currentPower) % 3 == 2)
+        {
+            power = powerSwitch.Push;
+            im.sprite = sprites[2];
+        }
         if (power == powerSwitch.Freeze)
         {
             FreezeObject();
@@ -67,6 +71,10 @@ public class PlayerController : MonoBehaviour {
         else if (power == powerSwitch.Magnesis)
         {
             PushPull();
+        }
+        else if (power == powerSwitch.Push)
+        {
+            PushObject();
         }
     }
 
@@ -138,6 +146,30 @@ public class PlayerController : MonoBehaviour {
                 {
                     carriedObject.transform.position = Vector3.MoveTowards(carriedObject.transform.position, player.transform.position, Time.deltaTime * 10f);
                 }
+        }
+    }
+
+    public void PushObject()
+    {
+        int x = Screen.width / 2;
+        int y = Screen.height / 2;
+        Ray ray = cam.ScreenPointToRay(new Vector3(x, y));
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            Rigidbody otherRb = hit.collider.gameObject.GetComponent<Rigidbody>();
+            if (otherRb != null)
+            {
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector3 mouseDir = mousePos - gameObject.transform.position;
+                mouseDir.z = 0.0f;
+                mouseDir = mouseDir.normalized;
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    otherRb.AddForce(-mouseDir * 1000);
+                }
+            }
         }
     }
 }

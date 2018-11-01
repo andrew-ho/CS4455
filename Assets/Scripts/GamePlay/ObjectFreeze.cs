@@ -35,6 +35,7 @@ public class ObjectFreeze : MonoBehaviour {
     public void StopObject()
     {
         rb.constraints = RigidbodyConstraints.FreezePosition;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
         stopped = true;
         PlayerController.frozenObject = rb.gameObject;
     }

@@ -167,7 +167,8 @@ public class PlayerController : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    otherRb.AddForce(-mouseDir * 1000);
+                    //otherRb.AddForce(-mouseDir * 100000);
+                    otherRb.AddForce(transform.forward * 1000000);
                 }
             }
         }

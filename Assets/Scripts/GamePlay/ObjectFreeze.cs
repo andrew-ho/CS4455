@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObjectFreeze : MonoBehaviour {
     public bool stopped = false;
     public float timer = 0f;
+    Animator anim;
     Rigidbody rb;
     public void Stop()
     {
@@ -15,11 +16,13 @@ public class ObjectFreeze : MonoBehaviour {
             rb.constraints = RigidbodyConstraints.None;
             stopped = false;
             PlayerController.frozenObject = null;
+            anim.enabled = true;
         }
     }
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -36,6 +39,7 @@ public class ObjectFreeze : MonoBehaviour {
     {
         rb.constraints = RigidbodyConstraints.FreezePosition;
         rb.constraints = RigidbodyConstraints.FreezeRotation;
+        anim.enabled = false;
         stopped = true;
         PlayerController.frozenObject = rb.gameObject;
     }

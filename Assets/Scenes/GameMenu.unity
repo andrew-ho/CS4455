@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -609,6 +609,61 @@ Prefab:
       propertyPath: m_Color.b
       value: 0.9529412
       objectReference: {fileID: 0}
+    - target: {fileID: 114074501238529262, guid: 71b3e2237e0264152b34aeab57430e59,
+        type: 2}
+      propertyPath: m_Text
+      value: "Instructions:\r\n- Get to the end of the room while avoiding or defeating
+        enemies.\r\n- Sneak around and don't let anyone see you.\r\n- Use your environment
+        to overcome puzzles and deal with enemies.\r\n\r\nControls:\r\nW/D - Move
+        forwards/backwards\r\nSpace - Jump\r\nShift (hold) - Run\r\nE (while looking
+        at an object/enemy) - Use ability\r\nMouse - Change direction\r\nMouse wheel
+        - Change ability\r\n\r\nAbilities:\r\nPause - Freeze an object/enemy for five
+        seconds.\r\nMove - Take control of a faraway object. Use the mouse and mouse
+        wheel to manipulate the object.\r\nPush - Apply immediate force to, or push,
+        a nearby object."
+      objectReference: {fileID: 0}
+    - target: {fileID: 224245104368836182, guid: 71b3e2237e0264152b34aeab57430e59,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 450
+      objectReference: {fileID: 0}
+    - target: {fileID: 114895904539662492, guid: 71b3e2237e0264152b34aeab57430e59,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Close
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 224652200527869688, guid: 71b3e2237e0264152b34aeab57430e59,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 224245104368836182, guid: 71b3e2237e0264152b34aeab57430e59,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 290
+      objectReference: {fileID: 0}
+    - target: {fileID: 114074501238529262, guid: 71b3e2237e0264152b34aeab57430e59,
+        type: 2}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 224652200527869688, guid: 71b3e2237e0264152b34aeab57430e59,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -175
+      objectReference: {fileID: 0}
+    - target: {fileID: 224319488316165246, guid: 71b3e2237e0264152b34aeab57430e59,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 37.500008
+      objectReference: {fileID: 0}
+    - target: {fileID: 224319488316165246, guid: 71b3e2237e0264152b34aeab57430e59,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 74.999985
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71b3e2237e0264152b34aeab57430e59, type: 2}
   m_IsPrefabAsset: 0
@@ -629,7 +684,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1507120573
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -718,7 +773,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1697487197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -732,7 +787,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stopped: 0
   timer: 0
-  rb: {fileID: 0}
 --- !u!135 &1697487198
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -815,3 +869,127 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &1742275647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1742275649}
+  - component: {fileID: 1742275648}
+  m_Layer: 0
+  m_Name: Music
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1742275648
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1742275647}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 1bd8ec8ac2022db4c888973a545b710a, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1742275649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1742275647}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 353.5, y: 199, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

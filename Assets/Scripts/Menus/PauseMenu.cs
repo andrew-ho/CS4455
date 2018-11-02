@@ -17,8 +17,14 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
         void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
+        if (Input.GetKeyUp(KeyCode.Escape)) {
+
+            ShowPauseMenu();
+        }
+    }
+
+    public void ShowPauseMenu() {
+
             if (canvasGroup.interactable)
             {
                 Cursor.lockState = CursorLockMode.Locked;
@@ -35,7 +41,8 @@ public class PauseMenu : MonoBehaviour
                 canvasGroup.alpha = 1f;
                 Time.timeScale = 0f;
             }
-        }
+        
+
     }
 
 }

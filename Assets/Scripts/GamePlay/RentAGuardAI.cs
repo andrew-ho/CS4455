@@ -22,6 +22,8 @@ public class RentAGuardAI : MonoBehaviour {
 	private Vector3 initPos;
 	private Quaternion initRot;
 
+	private bool gameOver = false;
+
 	public enum AIState
 	{
 		InitState,
@@ -36,13 +38,16 @@ public class RentAGuardAI : MonoBehaviour {
 	void Start () {
 		// rb = GetComponent<Rigidbody>();
 		agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-		player = GameObject.Find("Player");
+		player = GameObject.FindGameObjectWithTag("Player");
 		initPos = transform.position;
 		initRot = transform.rotation;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (gameOver) {
+			return;
+		}
 		if (Input.GetKeyDown(KeyCode.F)) {
 			Freeze();
 		}
@@ -80,7 +85,10 @@ public class RentAGuardAI : MonoBehaviour {
 				agent.SetDestination(player.transform.position); //change "Player" name as appropriate
 				if (agent.remainingDistance < 1f && !agent.pathPending) {
 					//TODO: attack
-					print("there will eventually have been an attack here");
+					//print("there will eventually have been an attack here");
+					Time.timeScale = 0f;
+					GameObject.Find("PauseCanvas").GetComponent<PauseMenu>().ShowPauseMenu();
+					gameOver = true;
 				}
 				if (timer >= 1) {
 					currState = AIState.LoseTarget;

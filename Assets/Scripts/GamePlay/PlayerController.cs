@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
 
     // Use this for initialization
-
+    Animator anim;
     Camera cam;
     GameObject player;
     GameObject carriedObject;
@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
         cam = GameObject.Find("vThirdPersonController").GetComponent<Camera>();
         player = GameObject.Find("vThirdPersonCamera");
         im = GameObject.Find("PowerSprite").GetComponent<Image>();
+        anim = GameObject.Find("vThirdPersonCamera").GetComponent<Animator>();
     }
     void OnGUI()
     {
@@ -40,6 +41,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.F)) {
+            anim.SetBool("isFreezing", true);
+            anim.speed = 3f;
+        } else {
+            anim.SetBool("isFreezing", false);
+            //anim.speed = 1f;
+        }
+
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
             currentPower++;
@@ -94,6 +103,7 @@ public class PlayerController : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.F))
                     {
                         freeze.StopObject();
+                        //anim.SetBool("isFreezing", true);
                     }
                 }
             }
@@ -119,6 +129,7 @@ public class PlayerController : MonoBehaviour
                         {
                             magnet.isHolding = true;
                             carriedObject = hit.collider.gameObject;
+                            //anim.
                         }
                     }
                 }
@@ -165,10 +176,14 @@ public class PlayerController : MonoBehaviour
                 mouseDir.z = 0.0f;
                 mouseDir = mouseDir.normalized;
 
-                if (Input.GetMouseButtonDown(0))
+                //if (Input.GetMouseButtonDown(0))
+                if (Input.GetKeyDown(KeyCode.P))
                 {
                     //otherRb.AddForce(-mouseDir * 100000);
                     otherRb.AddForce(transform.forward * 1000000);
+                    anim.SetBool("isPushing", true);
+                } else {
+                    anim.SetBool("isPushing", false);
                 }
             }
         }

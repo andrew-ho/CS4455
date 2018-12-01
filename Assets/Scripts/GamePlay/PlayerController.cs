@@ -41,15 +41,27 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.F)) {
+        if (Input.GetKey(KeyCode.F)) {
             anim.SetBool("isFreezing", true);
-            anim.speed = 3f;
+            //anim.speed = 3f;
         } else {
             anim.SetBool("isFreezing", false);
             //anim.speed = 1f;
         }
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        if (Input.GetKey(KeyCode.P)) {
+            anim.SetBool("isPushing", true);
+        } else {
+            anim.SetBool("isPushing", false);
+        }
+
+        if (Input.GetKey(KeyCode.E)) {
+            anim.SetBool("isPulling", true);
+        } else {
+            anim.SetBool("isPulling", false);
+        }
+
+            if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
             currentPower++;
         }
@@ -129,7 +141,6 @@ public class PlayerController : MonoBehaviour
                         {
                             magnet.isHolding = true;
                             carriedObject = hit.collider.gameObject;
-                            //anim.
                         }
                     }
                 }
@@ -181,9 +192,9 @@ public class PlayerController : MonoBehaviour
                 {
                     //otherRb.AddForce(-mouseDir * 100000);
                     otherRb.AddForce(transform.forward * 1000000);
-                    anim.SetBool("isPushing", true);
+                    //anim.SetBool("isPushing", true);
                 } else {
-                    anim.SetBool("isPushing", false);
+                    //anim.SetBool("isPushing", false);
                 }
             }
         }

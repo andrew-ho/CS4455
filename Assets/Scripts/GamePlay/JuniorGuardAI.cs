@@ -21,6 +21,8 @@ public class JuniorGuardAI : MonoBehaviour {
 	private Vector3 initPos;
 	private Quaternion initRot;
 
+    public Animator anim;
+
 	public enum AIState
 	{
 		Patrol,
@@ -37,6 +39,7 @@ public class JuniorGuardAI : MonoBehaviour {
 	void Start () {
 		// rb = GetComponent<Rigidbody>();
 		agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        anim = GameObject.Find("Soldier_Team1_Unlit").GetComponent<Animator>();
 		player = GameObject.Find("Player");
 		initPos = transform.position;
 		initRot = transform.rotation;
@@ -64,9 +67,11 @@ public class JuniorGuardAI : MonoBehaviour {
 
 		if (CheckForPlayer()) {
 			currState = AIState.Chase;
+            anim.SetBool("isRun", true);
 			timer = 0; //used to check time since player was last spotted, along with time since chase stopped (no need to have two timers)
 		} else {
 			timer += Time.deltaTime;
+            anim.SetBool("isRun", true);
 		}
 
 		switch (currState) {

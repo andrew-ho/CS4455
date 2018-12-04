@@ -17,7 +17,7 @@ public class GameStart : MonoBehaviour
         } else if (curr_Scene.name == "Level_04") {
             SceneManager.LoadScene("Level_04");
         } else {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("Tutorial");
         } 
     }
 }

@@ -17,12 +17,16 @@ public class DoorTrigger : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        anim.SetBool("Up", true);
-        obj.SetActive(false);
+    	if (collision.collider.tag == "Cube") {
+			anim.SetBool("Up", true);
+        	obj.SetActive(false);
+    	}
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        anim.SetBool("Up", false);
+    	if (collision.collider.tag == "Cube") {
+    		anim.SetBool("Up", false);
+    	}
     }
 }

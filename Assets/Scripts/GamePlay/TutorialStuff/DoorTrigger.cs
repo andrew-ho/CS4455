@@ -5,27 +5,22 @@ using UnityEngine;
 public class DoorTrigger : MonoBehaviour {
     public Animator anim;
     public GameObject obj;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    public bool needsCube;
 
     private void OnCollisionEnter(Collision collision)
     {
-    	if (collision.collider.tag == "Cube") {
+    	if (!needsCube || collision.collider.tag == "Cube") {
 			anim.SetBool("Up", true);
-        	obj.SetActive(false);
+			if (obj != null) {
+				obj.SetActive(false);
+			}
     	}
     }
 
     private void OnCollisionExit(Collision collision)
     {
-    	if (collision.collider.tag == "Cube") {
+    	if (!needsCube || collision.collider.tag == "Cube") {
     		anim.SetBool("Up", false);
     	}
     }

@@ -71,7 +71,7 @@ public class JuniorGuardAI : MonoBehaviour {
 			timer = 0; //used to check time since player was last spotted, along with time since chase stopped (no need to have two timers)
 		} else {
 			timer += Time.deltaTime;
-            anim.SetBool("isRun", true);
+            anim.SetBool("isRun", false);
 		}
 
 		switch (currState) {

@@ -40,7 +40,9 @@ public class JuniorGuardAI : MonoBehaviour {
 		// rb = GetComponent<Rigidbody>();
 		agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         anim = GameObject.Find("Soldier_Team1_Unlit").GetComponent<Animator>();
-		player = GameObject.Find("Player");
+        //player = GameObject.Find("Player");
+        player = GameObject.FindWithTag("Player");
+        Debug.Log(player);
 		initPos = transform.position;
 		initRot = transform.rotation;
 		currWaypoint = -1;
@@ -78,11 +80,11 @@ public class JuniorGuardAI : MonoBehaviour {
 			case AIState.Patrol:
 				if (agent.remainingDistance < 0.5f && !agent.pathPending) {
 					setNextWaypoint();
-				}
+                }
 				break;
 
 			case AIState.Chase:
-				agent.SetDestination(GameObject.Find("Player").transform.position); //change "Player" name as appropriate
+				agent.SetDestination(player.transform.position); //change "Player" name as appropriate
 				if (agent.remainingDistance < 1f && !agent.pathPending) {
 					//TODO: attack
 					print("there will eventually have been an attack here");
@@ -142,8 +144,9 @@ public class JuniorGuardAI : MonoBehaviour {
 
 	void setNextWaypoint() {
 		if (waypoints.Length > 0) {
-			currWaypoint = (currWaypoint + 1) % waypoints.Length;
-			agent.SetDestination(waypoints[currWaypoint].transform.position);
+            //currWaypoint = (currWaypoint + 1) % waypoints.Length;
+            currWaypoint = (currWaypoint + 5) % waypoints.Length;
+            agent.SetDestination(waypoints[currWaypoint].transform.position);
 		} else {
 			print("Could not set next waypoint because the number of waypoints is not greater than zero.");
 		}

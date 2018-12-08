@@ -41,12 +41,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (Input.GetKey(KeyCode.Alpha1))
+        {
+            anim.speed = .5f;
+        } else if (Input.GetKey(KeyCode.Alpha2)) {
+            anim.speed = 1f;
+        } else if (Input.GetKey(KeyCode.Alpha3)) {
+            anim.speed = 2f;
+        } else {
+            anim.speed = 1f;
+        }
+
         if (Input.GetKey(KeyCode.F)) {
             anim.SetBool("isFreezing", true);
-            //anim.speed = 3f;
         } else {
             anim.SetBool("isFreezing", false);
-            //anim.speed = 1f;
         }
 
         if (Input.GetKey(KeyCode.P)) {

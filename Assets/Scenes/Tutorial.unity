@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2494,6 +2494,11 @@ Prefab:
         type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 225442159095779624, guid: 621895e0bbb3f419dbf3c7777db9349f,
+        type: 2}
+      propertyPath: m_Alpha
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 621895e0bbb3f419dbf3c7777db9349f, type: 2}
@@ -8552,7 +8557,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1687009115}
+  anim2: {fileID: 0}
   obj: {fileID: 0}
+  needsCube: 0
 --- !u!65 &1319643096
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11784,7 +11791,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1687009115}
+  anim2: {fileID: 0}
   obj: {fileID: 1459155143}
+  needsCube: 0
 --- !u!65 &2077107377
 BoxCollider:
   m_ObjectHideFlags: 0

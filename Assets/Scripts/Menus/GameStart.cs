@@ -8,16 +8,15 @@ public class GameStart : MonoBehaviour
     public void StartGame()
     {
         Scene curr_Scene = SceneManager.GetActiveScene();
-        if (curr_Scene.name == "Level_01") {
-            SceneManager.LoadScene("Level_01");
-        } else if (curr_Scene.name == "Level_02") {
-            SceneManager.LoadScene("Level_02");
-        } else if (curr_Scene.name == "Level_03") {
-            SceneManager.LoadScene("Level_03");
-        } else if (curr_Scene.name == "Level_04") {
-            SceneManager.LoadScene("Level_04");
+        if (curr_Scene.name == "Final_Level_0") {
+            //GameObject camera = GameObject.Find("PauseCamera");
+            //camera.SetActive(false);
+            SceneManager.LoadScene("Final_Level_0");
+        } else if (curr_Scene.name == "Final_Level_1") {
+            SceneManager.LoadScene("Final_Level_0");
         } else {
             SceneManager.LoadScene("Tutorial");
-        } 
+        }
+
     }
 }

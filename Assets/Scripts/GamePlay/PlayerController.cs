@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public Texture2D crosshairImage;
     public Sprite[] sprites;
     int currentPower = 0;
+    private int layerMask = (1 << 8);
     public enum powerSwitch
     {
         Freeze,
@@ -40,14 +41,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        Powers();
+    }
+    public void Powers()
+    {
+        if (carriedObject == null)
         {
-            currentPower++;
-        }
-        if (Input.GetAxis("Mouse ScrollWheel") < 0)
-        {
-            currentPower--;
+            if (Input.GetAxis("Mouse ScrollWheel") > 0)
+            {
+                currentPower++;
+            }
+            if (Input.GetAxis("Mouse ScrollWheel") < 0)
+            {
+                currentPower--;
 
+            }
         }
         if (Mathf.Abs(currentPower) % 3 == 0)
         {
@@ -84,7 +92,7 @@ public class PlayerController : MonoBehaviour
         int y = Screen.height / 2;
         Ray ray = cam.ScreenPointToRay(new Vector3(x, y));
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, layerMask))
         {
             ObjectFreeze freeze = hit.collider.gameObject.GetComponent<ObjectFreeze>();
             if (freeze != null)
@@ -106,47 +114,54 @@ public class PlayerController : MonoBehaviour
         int y = Screen.height / 2;
         Ray ray = cam.ScreenPointToRay(new Vector3(x, y));
         RaycastHit hit;
-        if (carriedObject == null)
+        if (Input.GetKeyDown(KeyCode.E) && carriedObject == null)
         {
-            if (Physics.Raycast(ray, out hit))
+            Debug.Log("shit");
+            if (Physics.Raycast(ray, out hit, (1 << 8)))
             {
+                Debug.Log(hit.collider.gameObject);
                 Magnet magnet = hit.collider.gameObject.GetComponent<Magnet>();
                 if (magnet != null)
                 {
-                    if (Input.GetKeyDown(KeyCode.E))
+
+                    if (!magnet.isHolding)
                     {
-                        if (!magnet.isHolding)
-                        {
-                            magnet.isHolding = true;
-                            carriedObject = hit.collider.gameObject;
-                        }
+                        magnet.isHolding = true;
+                        carriedObject = hit.collider.gameObject;
                     }
+
                 }
             }
-        }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.E))
+            else
             {
-                carriedObject.GetComponent<Magnet>().isHolding = false;
-                carriedObject = null;
+                Debug.Log("hit nothing?");
             }
-            //carriedObject.transform.position = Vector3.Lerp(carriedObject.transform.position, new Vector3(player.transform.position.x, carriedObject.transform.position.y, 
-            //   carriedObject.transform.position.z - Input.GetAxis("Mouse ScrollWheel")), Time.deltaTime * 5f);
+
+        }
+        else if (Input.GetKeyDown(KeyCode.E) && carriedObject != null)
+        {
+            carriedObject.GetComponent<Magnet>().isHolding = false;
+            carriedObject = null;
+        }
+        //carriedObject.transform.position = Vector3.Lerp(carriedObject.transform.position, new Vector3(player.transform.position.x, carriedObject.transform.position.y, 
+        //   carriedObject.transform.position.z - Input.GetAxis("Mouse ScrollWheel")), Time.deltaTime * 5f);
+        else if (Input.GetAxis("Mouse ScrollWheel") > 0 && carriedObject != null)
+        {
             float distance = Vector3.Distance(carriedObject.transform.position, player.transform.position);
             if (distance <= 15f)
             {
-                if (Input.GetAxis("Mouse ScrollWheel") > 0)
-                {
-                    carriedObject.transform.position = Vector3.MoveTowards(carriedObject.transform.position, player.transform.position, -Time.deltaTime * 10f);
-                }
+                carriedObject.transform.position = Vector3.MoveTowards(carriedObject.transform.position, player.transform.position, -Time.deltaTime * 10f);
             }
-            if (distance >= 3f)
-                if (Input.GetAxis("Mouse ScrollWheel") < 0)
-                {
-                    carriedObject.transform.position = Vector3.MoveTowards(carriedObject.transform.position, player.transform.position, Time.deltaTime * 10f);
-                }
         }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && carriedObject != null)
+        {
+            float distance = Vector3.Distance(carriedObject.transform.position, player.transform.position);
+            if (distance >= 3f)
+            {
+                carriedObject.transform.position = Vector3.MoveTowards(carriedObject.transform.position, player.transform.position, Time.deltaTime * 10f);
+            }
+        }
+        
     }
 
     public void PushObject()
@@ -155,8 +170,9 @@ public class PlayerController : MonoBehaviour
         int y = Screen.height / 2;
         Ray ray = cam.ScreenPointToRay(new Vector3(x, y));
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, layerMask))
         {
+            Debug.Log("boo");
             Rigidbody otherRb = hit.collider.gameObject.GetComponent<Rigidbody>();
             if (otherRb != null)
             {

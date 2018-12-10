@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     Animator anim;
     Camera cam;
     GameObject player;
+    //Collider enemy1;
+    //Collider enemy2;
     GameObject carriedObject;
     Image im;
     public static GameObject frozenObject;
@@ -30,6 +32,8 @@ public class PlayerController : MonoBehaviour
         player = GameObject.Find("vThirdPersonCamera");
         im = GameObject.Find("PowerSprite").GetComponent<Image>();
         anim = GameObject.Find("vThirdPersonCamera").GetComponent<Animator>();
+        //enemy1 = GameObject.Find("Rent_A_Guard").GetComponent<Collider>();
+        //enemy2 = GameObject.Find("Junior_Guard").GetComponent<Collider>();
     }
     void OnGUI()
     {
@@ -58,7 +62,8 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("isFreezing", false);
         }
 
-        if (Input.GetKey(KeyCode.P)) {
+        if (Input.GetMouseButton(0))
+        {
             anim.SetBool("isPushing", true);
         } else {
             anim.SetBool("isPushing", false);
@@ -196,8 +201,8 @@ public class PlayerController : MonoBehaviour
                 mouseDir.z = 0.0f;
                 mouseDir = mouseDir.normalized;
 
-                //if (Input.GetMouseButtonDown(0))
-                if (Input.GetKeyDown(KeyCode.P))
+                if (Input.GetMouseButtonDown(0))
+                //if (Input.GetKeyDown(KeyCode.P))
                 {
                     //otherRb.AddForce(-mouseDir * 100000);
                     otherRb.AddForce(transform.forward * 1000000);
@@ -208,4 +213,12 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    //public void CollisionEnter(Collision c)
+    //{
+    //    Debug.Log("c = " + c);
+    //    //if (c == enemy1 || c == enemy2) {
+
+    //    //}
+    //}
 }

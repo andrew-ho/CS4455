@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CanvasGroup))]
+
 public class RentAGuardAI : MonoBehaviour {
 
 	public bool isFrozen = false;
@@ -24,7 +26,11 @@ public class RentAGuardAI : MonoBehaviour {
 
 	private bool gameOver = false;
 
-	public enum AIState
+    private Animator anim;
+    private Animator playerAnim;
+    CanvasGroup canvasGroup;
+
+    public enum AIState
 	{
 		InitState,
 		Stationary,
@@ -34,14 +40,24 @@ public class RentAGuardAI : MonoBehaviour {
 	};
 	public AIState currState;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        canvasGroup = GameObject.Find("GameOverCanvas").GetComponent<CanvasGroup>();
+        HideGameOverMenu();
+    }
+
+    // Use this for initialization
+    void Start () {
 		// rb = GetComponent<Rigidbody>();
 		agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-		player = GameObject.FindGameObjectWithTag("Player");
-		initPos = transform.position;
+        //player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindWithTag("Player");
+        playerAnim = player.GetComponent<Animator>();
+        initPos = transform.position;
 		initRot = transform.rotation;
-	}
+
+        anim = GameObject.Find("Rent_A_Guard").GetComponent<Animator>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -65,7 +81,8 @@ public class RentAGuardAI : MonoBehaviour {
 		}
 
 		if (CheckForPlayer()) {
-			currState = AIState.Chase;
+            anim.SetBool("isRun", true);
+            currState = AIState.Chase;
 			timer = 0; //used to check time since player was last spotted, along with time since chase stopped (no need to have two timers)
 		} else {
 			timer += Time.deltaTime;
@@ -82,14 +99,18 @@ public class RentAGuardAI : MonoBehaviour {
 				break;
 
 			case AIState.Chase:
-				agent.SetDestination(player.transform.position); //change "Player" name as appropriate
-				if (agent.remainingDistance < 1f && !agent.pathPending) {
-					//TODO: attack
-					//print("there will eventually have been an attack here");
-					Time.timeScale = 0f;
-					GameObject.Find("PauseCanvas").GetComponent<PauseMenu>().ShowPauseMenu();
-					gameOver = true;
-				}
+                agent.SetDestination(player.transform.position); //change "Player" name as appropriate
+                if (agent.remainingDistance < 1f && !agent.pathPending) {
+                    //TODO: attack
+                    //print("there will eventually have been an attack here");
+                    //Time.timeScale = 0f;
+                    //GameObject.Find("PauseCanvas").GetComponent<PauseMenu>().ShowPauseMenu();
+                    //gameOver = true;
+                    anim.SetBool("isAttack", true);
+                    playerAnim.SetBool("isDeath", true);
+                    print("there will eventually have been an attack here");
+                    StartCoroutine(ShowGameOverMenu());
+                }
 				if (timer >= 1) {
 					currState = AIState.LoseTarget;
 					timer = 0;
@@ -104,6 +125,7 @@ public class RentAGuardAI : MonoBehaviour {
 					walkingBackDestSet = false;
 					currState = AIState.WalkBack;
 				}
+                anim.SetBool("isRun", false);
 				break;
 
 			case AIState.WalkBack:
@@ -145,4 +167,23 @@ public class RentAGuardAI : MonoBehaviour {
 			&& Vector3.Angle(transform.TransformDirection(Vector3.forward), distVec) < visionAngle
 			&& Physics.Raycast(transform.position, distVec, out hit, visionDist) && hit.collider.gameObject.tag == "Player");
 	}
+
+    IEnumerator ShowGameOverMenu()
+    {
+        yield return new WaitForSeconds(4f);
+        Cursor.lockState = CursorLockMode.None;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
+        canvasGroup.alpha = 1f;
+        Time.timeScale = 0f;
+    }
+
+    public void HideGameOverMenu()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
+        canvasGroup.alpha = 0f;
+        Time.timeScale = 1f;
+    }
 }

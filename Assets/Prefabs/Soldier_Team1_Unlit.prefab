@@ -2529,6 +2529,7 @@ MonoBehaviour:
   visionDist: 10
   visionAngle: 30
   anim: {fileID: 0}
+  playerAnim: {fileID: 0}
   currState: 0
   waypoints:
   - {fileID: 0}

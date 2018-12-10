@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CanvasGroup))]
+
 public class JuniorGuardAI : MonoBehaviour {
 
 	public bool isFrozen = false;
@@ -22,8 +24,10 @@ public class JuniorGuardAI : MonoBehaviour {
 	private Quaternion initRot;
 
     public Animator anim;
+    public Animator playerAnim;
+    CanvasGroup canvasGroup;
 
-	public enum AIState
+    public enum AIState
 	{
 		Patrol,
 		Chase,
@@ -35,14 +39,20 @@ public class JuniorGuardAI : MonoBehaviour {
 	private int currWaypoint;
 	public GameObject[] waypoints;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        canvasGroup = GameObject.Find("GameOverCanvas").GetComponent<CanvasGroup>();
+        HideGameOverMenu();
+    }
+    // Use this for initialization
+    void Start () {
 		// rb = GetComponent<Rigidbody>();
 		agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        anim = GameObject.Find("Soldier_Team1_Unlit").GetComponent<Animator>();
+        anim = GameObject.Find("Junior_Guard").GetComponent<Animator>();
         //player = GameObject.Find("Player");
         player = GameObject.FindWithTag("Player");
-        Debug.Log(player);
+        playerAnim = player.GetComponent<Animator>();
+        //Debug.Log(player);
 		initPos = transform.position;
 		initRot = transform.rotation;
 		currWaypoint = -1;
@@ -86,9 +96,13 @@ public class JuniorGuardAI : MonoBehaviour {
 			case AIState.Chase:
 				agent.SetDestination(player.transform.position); //change "Player" name as appropriate
 				if (agent.remainingDistance < 1f && !agent.pathPending) {
-					//TODO: attack
+                    //TODO: attack
+                    anim.SetBool("isAttack", true);
+                    playerAnim.SetBool("isDeath", true);
 					print("there will eventually have been an attack here");
-				}
+                    StartCoroutine(ShowGameOverMenu());
+
+                }
 				if (timer >= 1) {
 					currState = AIState.LoseTarget;
 					timer = 0;
@@ -151,4 +165,23 @@ public class JuniorGuardAI : MonoBehaviour {
 			print("Could not set next waypoint because the number of waypoints is not greater than zero.");
 		}
 	}
+
+    IEnumerator ShowGameOverMenu()
+    {
+            yield return new WaitForSeconds(4f);
+            Cursor.lockState = CursorLockMode.None;
+            canvasGroup.interactable = true;
+            canvasGroup.blocksRaycasts = true;
+            canvasGroup.alpha = 1f;
+            Time.timeScale = 0f;
+    }
+
+    public void HideGameOverMenu()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
+        canvasGroup.alpha = 0f;
+        Time.timeScale = 1f;
+    }
 }

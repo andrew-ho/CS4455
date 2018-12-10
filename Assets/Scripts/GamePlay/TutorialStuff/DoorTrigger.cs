@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DoorTrigger : MonoBehaviour {
     public Animator anim;
+    public Animator anim2;
     public GameObject obj;
 
     public bool needsCube;
@@ -11,7 +12,12 @@ public class DoorTrigger : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
     	if (!needsCube || collision.collider.tag == "Cube") {
-			anim.SetBool("Up", true);
+			if (anim != null) {
+				anim.SetBool("Up", true);
+			}
+			if (anim2 != null) {
+				anim2.SetBool("Up", true);
+			}
 			if (obj != null) {
 				obj.SetActive(false);
 			}
@@ -21,7 +27,12 @@ public class DoorTrigger : MonoBehaviour {
     private void OnCollisionExit(Collision collision)
     {
     	if (!needsCube || collision.collider.tag == "Cube") {
-    		anim.SetBool("Up", false);
+    		if (anim != null) {
+    			anim.SetBool("Up", false);
+    		}
+    		if (anim2 != null) {
+    			anim2.SetBool("Up", false);
+    		}
     	}
     }
 }

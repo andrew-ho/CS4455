@@ -22,7 +22,7 @@ public class InstantiateObjects : MonoBehaviour {
             GameObject o = Instantiate(obj, transform.position, Quaternion.identity);
             if (addForce)
             {
-                o.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -2000), ForceMode.Force);
+                o.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -2000000), ForceMode.Force);
             }
             timer = 0;
         }

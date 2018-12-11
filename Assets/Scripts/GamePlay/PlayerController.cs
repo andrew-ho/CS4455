@@ -50,6 +50,15 @@ public class PlayerController : MonoBehaviour
     {
         //Movement();
         Powers();
+
+        if (this.transform.position.y < -21) {
+        	CanvasGroup canvasGroup = GameObject.Find("GameOverCanvas").GetComponent<CanvasGroup>();
+        	Cursor.lockState = CursorLockMode.None;
+	        canvasGroup.interactable = true;
+	        canvasGroup.blocksRaycasts = true;
+	        canvasGroup.alpha = 1f;
+	        Time.timeScale = 0f;
+        }
     }
 
     //public void Movement() {
@@ -228,6 +237,24 @@ public class PlayerController : MonoBehaviour
                     otherRb.AddForce(transform.forward * 1000000);
                 }
             }
+            else if (hit.collider.gameObject.name == "Red Press Button 1" && GameObject.Find("Cylinder 1").GetComponent<Animator>().GetBool("Out") == false) {
+            	if (Input.GetMouseButtonDown(0)) {
+            		GameObject.Find("Cylinder 1").GetComponent<Animator>().SetBool("Out", true);
+            		StartCoroutine(BringPistonIn());
+            	}
+            }
+            else if (hit.collider.gameObject.name == "Red Press Button 2" && GameObject.Find("Cylinder 1").GetComponent<Animator>().GetBool("Out") == false) {
+            	if (Input.GetMouseButtonDown(0)) {
+            		GameObject.Find("Cylinder 2").GetComponent<Animator>().SetBool("Out", true);
+            		StartCoroutine(BringPistonIn());
+            	}
+            }
         }
+    }
+
+    IEnumerator BringPistonIn() {
+    	yield return new WaitForSeconds(.1f);
+    	GameObject.Find("Cylinder 1").GetComponent<Animator>().SetBool("Out", false);
+    	GameObject.Find("Cylinder 2").GetComponent<Animator>().SetBool("Out", false);
     }
 }

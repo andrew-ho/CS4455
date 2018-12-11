@@ -34,7 +34,7 @@ public class PauseMenu : MonoBehaviour
                 canvasGroup.blocksRaycasts = false; 
                 canvasGroup.alpha = 0f;
                 Time.timeScale = 1f;
-            }   
+            }
             else
             {
                 Cursor.lockState = CursorLockMode.None;

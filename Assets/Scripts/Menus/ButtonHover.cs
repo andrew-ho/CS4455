@@ -10,7 +10,6 @@
     
     public void OnPointerEnter(PointerEventData eventData)
     {
-        print("hover");
         text.color = newColor; //Or however you do your color
     }
 

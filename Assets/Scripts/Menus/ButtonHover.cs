@@ -5,7 +5,7 @@
  
  public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    Color newColor = new Color(255, 159, 0);
+    Color newColor = new Color(255, 129, 0);
     public Text text;
     
     public void OnPointerEnter(PointerEventData eventData)

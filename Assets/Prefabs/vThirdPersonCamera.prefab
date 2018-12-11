@@ -2641,12 +2641,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1891817108346396}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7980bd6de494eef44a7f612d6336e066, type: 3}
+  m_Script: {fileID: 11500000, guid: ebfa51f7dccff4232b71f0515638d46c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
-  player: {fileID: 1891817108346396}
   crosshairImage: {fileID: 2800000, guid: 175d992b79f37424584e83016be3b51e, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: eaa9dd1620b286b4f918fac1a017b038, type: 3}
+  - {fileID: 21300000, guid: ef44db390b3270b418f7e06906d909f9, type: 3}
+  - {fileID: 21300000, guid: 87ec62077fabbf240ae723c79310dfad, type: 3}
+  movementSpeed: 1
+  playerJumpHeight: 0.1
+  power: 0
 --- !u!136 &136267868511775134
 CapsuleCollider:
   m_ObjectHideFlags: 1

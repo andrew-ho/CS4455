@@ -17,6 +17,11 @@ public class PlayerController : MonoBehaviour
     public Sprite[] sprites;
     int currentPower = 0;
     private int layerMask = (1 << 8);
+
+    Animator anim;
+    public float movementSpeed = 5.0f;
+    public float playerJumpHeight = .1f;
+
     public enum powerSwitch
     {
         Freeze,
@@ -30,6 +35,8 @@ public class PlayerController : MonoBehaviour
         cam = GameObject.Find("vThirdPersonController").GetComponent<Camera>();
         player = GameObject.Find("vThirdPersonCamera");
         im = GameObject.Find("PowerSprite").GetComponent<Image>();
+
+        anim = GameObject.Find("vThirdPersonCamera").GetComponent<Animator>();
     }
     void OnGUI()
     {
@@ -41,7 +48,41 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        Movement();
         Powers();
+    }
+
+    public void Movement() {
+        if (Input.GetKey(KeyCode.W))
+        {
+            anim.SetBool("walk", true);
+            transform.position += Vector3.forward * Time.deltaTime * movementSpeed;
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            anim.SetBool("walk", true);
+            transform.position += Vector3.back * Time.deltaTime * movementSpeed;
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            anim.SetBool("walk", true);
+            transform.position += Vector3.left * Time.deltaTime * movementSpeed;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            anim.SetBool("walk", true);
+            transform.position += Vector3.right * Time.deltaTime * movementSpeed;
+        } else {
+            anim.SetBool("walk", false);
+        }
+
+        if (Input.GetKey(KeyCode.Space)) {
+            anim.SetBool("jump", true);
+            //transform.position = new Vector3(transform.position.x, playerJumpHeight, transform.position.z);
+            transform.position += new Vector3(0, playerJumpHeight, 0);
+        } else {
+            anim.SetBool("jump", false);
+        }
     }
     public void Powers()
     {

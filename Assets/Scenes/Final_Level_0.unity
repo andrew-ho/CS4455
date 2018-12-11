@@ -7850,6 +7850,7 @@ GameObject:
   - component: {fileID: 916833272}
   - component: {fileID: 916833271}
   - component: {fileID: 916833270}
+  - component: {fileID: 916833273}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -7882,11 +7883,11 @@ CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 916833268}
-  m_Enabled: 0
-  m_Alpha: 0
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 1
 --- !u!114 &916833271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7921,6 +7922,17 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 916833268}
   m_CullTransparentMesh: 0
+--- !u!114 &916833273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 916833268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb727d291c37492a99b83d6a2dc762f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &927204531 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4116259839626626, guid: c21252cbe01eccd4a967b728d0b09f5a,
@@ -12841,6 +12853,15 @@ Prefab:
         type: 2}
       propertyPath: m_FontData.m_MaxSize
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1314032316214810, guid: 621895e0bbb3f419dbf3c7777db9349f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 225442159095779624, guid: 621895e0bbb3f419dbf3c7777db9349f,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 621895e0bbb3f419dbf3c7777db9349f, type: 2}

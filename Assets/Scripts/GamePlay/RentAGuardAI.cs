@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CanvasGroup))]
 
@@ -29,6 +30,7 @@ public class RentAGuardAI : MonoBehaviour {
     private Animator anim;
     private Animator playerAnim;
     CanvasGroup canvasGroup;
+    //GameObject GameOverMenu;
 
     public enum AIState
 	{
@@ -44,6 +46,8 @@ public class RentAGuardAI : MonoBehaviour {
     {
         canvasGroup = GameObject.Find("GameOverCanvas").GetComponent<CanvasGroup>();
         HideGameOverMenu();
+        //GameOverMenu = GameObject.Find("GameOverMenu");
+        //GameOverMenu.SetActive(false);
     }
 
     // Use this for initialization
@@ -170,6 +174,13 @@ public class RentAGuardAI : MonoBehaviour {
     IEnumerator ShowGameOverMenu()
     {
         yield return new WaitForSeconds(3f);
+
+        //GameOverMenu.SetActive(true);
+
+        //GameStart.prev = SceneManager.GetActiveScene().name;
+        //SceneManager.LoadScene("GameOverScene");
+        //SceneManager.LoadScene("GameOverScene");
+
         Cursor.lockState = CursorLockMode.None;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;

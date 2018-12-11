@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CanvasGroup))]
+
 public class JuniorGuardAI : MonoBehaviour {
 
 	public bool isFrozen = false;
@@ -21,7 +23,11 @@ public class JuniorGuardAI : MonoBehaviour {
 	private Vector3 initPos;
 	private Quaternion initRot;
 
-	public enum AIState
+    public Animator anim;
+    public Animator playerAnim;
+    CanvasGroup canvasGroup;
+
+    public enum AIState
 	{
 		Patrol,
 		Chase,
@@ -33,16 +39,26 @@ public class JuniorGuardAI : MonoBehaviour {
 	private int currWaypoint;
 	public GameObject[] waypoints;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        canvasGroup = GameObject.Find("GameOverCanvas").GetComponent<CanvasGroup>();
+        HideGameOverMenu();
+    }
+
+    // Use this for initialization
+    void Start () {
 		// rb = GetComponent<Rigidbody>();
 		agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-		player = GameObject.Find("Player");
+		//player = GameObject.Find("Player");
 		initPos = transform.position;
 		initRot = transform.rotation;
 		currWaypoint = -1;
 		setNextWaypoint();
-	}
+
+        player = GameObject.FindWithTag("Player");
+        playerAnim = player.GetComponent<Animator>();
+        anim = GameObject.Find("Junior_Guard").GetComponent<Animator>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -63,25 +79,31 @@ public class JuniorGuardAI : MonoBehaviour {
 		}
 
 		if (CheckForPlayer()) {
-			currState = AIState.Chase;
+            anim.SetBool("isRun", true);
+            currState = AIState.Chase;
 			timer = 0; //used to check time since player was last spotted, along with time since chase stopped (no need to have two timers)
 		} else {
-			timer += Time.deltaTime;
+            anim.SetBool("isRun", false);
+            timer += Time.deltaTime;
 		}
 
 		switch (currState) {
 			case AIState.Patrol:
-				if (agent.remainingDistance < 0.5f && !agent.pathPending) {
+				if (agent.remainingDistance < .5f && !agent.pathPending) {
 					setNextWaypoint();
 				}
 				break;
 
 			case AIState.Chase:
-				agent.SetDestination(GameObject.Find("Player").transform.position); //change "Player" name as appropriate
+				agent.SetDestination(player.transform.position); //change "Player" name as appropriate
 				if (agent.remainingDistance < 1f && !agent.pathPending) {
 					//TODO: attack
 					print("there will eventually have been an attack here");
-				}
+                    anim.SetBool("isAttack", true);
+                    playerAnim.SetBool("isDeath", true);
+                    print("there will eventually have been an attack here");
+                    StartCoroutine(ShowGameOverMenu());
+                }
 				if (timer >= 1) {
 					currState = AIState.LoseTarget;
 					timer = 0;
@@ -143,4 +165,23 @@ public class JuniorGuardAI : MonoBehaviour {
 			print("Could not set next waypoint because the number of waypoints is not greater than zero.");
 		}
 	}
+
+    IEnumerator ShowGameOverMenu()
+    {
+        yield return new WaitForSeconds(3f);
+        Cursor.lockState = CursorLockMode.None;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
+        canvasGroup.alpha = 1f;
+        Time.timeScale = 0f;
+    }
+
+    public void HideGameOverMenu()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
+        canvasGroup.alpha = 0f;
+        Time.timeScale = 1f;
+    }
 }

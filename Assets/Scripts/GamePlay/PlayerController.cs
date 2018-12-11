@@ -48,42 +48,42 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Movement();
+        //Movement();
         Powers();
     }
 
-    public void Movement() {
-        if (Input.GetKey(KeyCode.W))
-        {
-            anim.SetBool("walk", true);
-            transform.position += Vector3.forward * Time.deltaTime * movementSpeed;
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            anim.SetBool("walk", true);
-            transform.position += Vector3.back * Time.deltaTime * movementSpeed;
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            anim.SetBool("walk", true);
-            transform.position += Vector3.left * Time.deltaTime * movementSpeed;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            anim.SetBool("walk", true);
-            transform.position += Vector3.right * Time.deltaTime * movementSpeed;
-        } else {
-            anim.SetBool("walk", false);
-        }
+    //public void Movement() {
+    //    if (Input.GetKey(KeyCode.W))
+    //    {
+    //        anim.SetBool("walk", true);
+    //        transform.position += Vector3.forward * Time.deltaTime * movementSpeed;
+    //    }
+    //    else if (Input.GetKey(KeyCode.S))
+    //    {
+    //        anim.SetBool("walk", true);
+    //        transform.position += Vector3.back * Time.deltaTime * movementSpeed;
+    //    }
+    //    else if (Input.GetKey(KeyCode.A))
+    //    {
+    //        anim.SetBool("walk", true);
+    //        transform.position += Vector3.left * Time.deltaTime * movementSpeed;
+    //    }
+    //    else if (Input.GetKey(KeyCode.D))
+    //    {
+    //        anim.SetBool("walk", true);
+    //        transform.position += Vector3.right * Time.deltaTime * movementSpeed;
+    //    } else {
+    //        anim.SetBool("walk", false);
+    //    }
 
-        if (Input.GetKey(KeyCode.Space)) {
-            anim.SetBool("jump", true);
-            //transform.position = new Vector3(transform.position.x, playerJumpHeight, transform.position.z);
-            transform.position += new Vector3(0, playerJumpHeight, 0);
-        } else {
-            anim.SetBool("jump", false);
-        }
-    }
+    //    if (Input.GetKey(KeyCode.Space)) {
+    //        anim.SetBool("jump", true);
+    //        //transform.position = new Vector3(transform.position.x, playerJumpHeight, transform.position.z);
+    //        transform.position += new Vector3(0, playerJumpHeight, 0);
+    //    } else {
+    //        anim.SetBool("jump", false);
+    //    }
+    //}
     public void Powers()
     {
         if (carriedObject == null)

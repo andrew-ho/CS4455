@@ -11,6 +11,8 @@ public class PauseMenu : MonoBehaviour
 
     void Awake()
     {
+        //GameObject camera = GameObject.Find("PauseCamera");
+        //camera.SetActive(true);
         canvasGroup = GetComponent<CanvasGroup>();
 
     }

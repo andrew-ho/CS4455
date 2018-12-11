@@ -15,7 +15,7 @@ public class GameStart : MonoBehaviour
         } else if (curr_Scene.name == "Final_Level_1") {
             SceneManager.LoadScene("Final_Level_0");
         } else {
-            SceneManager.LoadScene("Tutorial");
+            SceneManager.LoadScene("Final_Level_0");
         }
 
     }

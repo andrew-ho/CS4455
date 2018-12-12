@@ -16,9 +16,12 @@ public class PlayerController : MonoBehaviour
     public Texture2D crosshairImage;
     public Sprite[] sprites;
     int currentPower = 0;
-    private int layerMask = (1 << 8);
-
+    private int layerMask = ~(1 << 8);
+    Vector3 movement;
+    Rigidbody rb;
     Animator anim;
+    float m_OrigGroundCheckDistance;
+    float m_GroundCheckDistance = 0.1f;
     public float movementSpeed = 5.0f;
     public float playerJumpHeight = .1f;
 
@@ -28,15 +31,15 @@ public class PlayerController : MonoBehaviour
         Magnesis,
         Push
     };
+
+
     public powerSwitch power;
     void Start()
     {
         power = powerSwitch.Freeze;
         cam = GameObject.Find("vThirdPersonController").GetComponent<Camera>();
-        player = GameObject.Find("vThirdPersonCamera");
+        player = GameObject.FindGameObjectWithTag("Player");
         im = GameObject.Find("PowerSprite").GetComponent<Image>();
-
-        anim = GameObject.Find("vThirdPersonCamera").GetComponent<Animator>();
     }
     void OnGUI()
     {
@@ -51,6 +54,7 @@ public class PlayerController : MonoBehaviour
         //Movement();
         Powers();
 
+
         if (this.transform.position.y < -21) {
         	CanvasGroup canvasGroup = GameObject.Find("GameOverCanvas").GetComponent<CanvasGroup>();
         	Cursor.lockState = CursorLockMode.None;
@@ -59,40 +63,9 @@ public class PlayerController : MonoBehaviour
 	        canvasGroup.alpha = 1f;
 	        Time.timeScale = 0f;
         }
+
     }
 
-    //public void Movement() {
-    //    if (Input.GetKey(KeyCode.W))
-    //    {
-    //        anim.SetBool("walk", true);
-    //        transform.position += Vector3.forward * Time.deltaTime * movementSpeed;
-    //    }
-    //    else if (Input.GetKey(KeyCode.S))
-    //    {
-    //        anim.SetBool("walk", true);
-    //        transform.position += Vector3.back * Time.deltaTime * movementSpeed;
-    //    }
-    //    else if (Input.GetKey(KeyCode.A))
-    //    {
-    //        anim.SetBool("walk", true);
-    //        transform.position += Vector3.left * Time.deltaTime * movementSpeed;
-    //    }
-    //    else if (Input.GetKey(KeyCode.D))
-    //    {
-    //        anim.SetBool("walk", true);
-    //        transform.position += Vector3.right * Time.deltaTime * movementSpeed;
-    //    } else {
-    //        anim.SetBool("walk", false);
-    //    }
-
-    //    if (Input.GetKey(KeyCode.Space)) {
-    //        anim.SetBool("jump", true);
-    //        //transform.position = new Vector3(transform.position.x, playerJumpHeight, transform.position.z);
-    //        transform.position += new Vector3(0, playerJumpHeight, 0);
-    //    } else {
-    //        anim.SetBool("jump", false);
-    //    }
-    //}
     public void Powers()
     {
         if (carriedObject == null)
@@ -142,7 +115,7 @@ public class PlayerController : MonoBehaviour
         int y = Screen.height / 2;
         Ray ray = cam.ScreenPointToRay(new Vector3(x, y));
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, layerMask))
+        if (Physics.Raycast(ray, out hit, 100f, layerMask))
         {
             ObjectFreeze freeze = hit.collider.gameObject.GetComponent<ObjectFreeze>();
             if (freeze != null)
@@ -167,7 +140,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && carriedObject == null)
         {
             Debug.Log("shit");
-            if (Physics.Raycast(ray, out hit, (1 << 8)))
+            if (Physics.Raycast(ray, out hit, 100f, ~(1 << 8)))
             {
                 Debug.Log(hit.collider.gameObject);
                 Magnet magnet = hit.collider.gameObject.GetComponent<Magnet>();
@@ -211,7 +184,7 @@ public class PlayerController : MonoBehaviour
                 carriedObject.transform.position = Vector3.MoveTowards(carriedObject.transform.position, player.transform.position, Time.deltaTime * 10f);
             }
         }
-        
+
     }
 
     public void PushObject()
@@ -220,7 +193,7 @@ public class PlayerController : MonoBehaviour
         int y = Screen.height / 2;
         Ray ray = cam.ScreenPointToRay(new Vector3(x, y));
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, layerMask))
+        if (Physics.Raycast(ray, out hit, 100f, layerMask))
         {
             Debug.Log("boo");
             Rigidbody otherRb = hit.collider.gameObject.GetComponent<Rigidbody>();
@@ -251,10 +224,13 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
-    IEnumerator BringPistonIn() {
-    	yield return new WaitForSeconds(.1f);
-    	GameObject.Find("Cylinder 1").GetComponent<Animator>().SetBool("Out", false);
-    	GameObject.Find("Cylinder 2").GetComponent<Animator>().SetBool("Out", false);
+    IEnumerator BringPistonIn()
+    {
+        yield return new WaitForSeconds(.1f);
+        GameObject.Find("Cylinder 1").GetComponent<Animator>().SetBool("Out", false);
+        GameObject.Find("Cylinder 2").GetComponent<Animator>().SetBool("Out", false);
     }
 }
+
+
+

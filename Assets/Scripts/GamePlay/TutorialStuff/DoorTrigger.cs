@@ -12,7 +12,6 @@ public class DoorTrigger : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
     	if (!needsCube || collision.collider.tag == "Cube") {
-    		print("APPLEEEEEEEE");
 			if (anim != null) {
 				anim.SetBool("Up", true);
 			}

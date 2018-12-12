@@ -25,7 +25,7 @@ public class JuniorGuardAI : MonoBehaviour {
 	private Vector3 initPos;
 	private Quaternion initRot;
 
-	private bool knockedOut = true;
+	public bool knockedOut = false;
 
     public Animator anim;
     public Animator playerAnim;
@@ -84,13 +84,13 @@ public class JuniorGuardAI : MonoBehaviour {
 				return;
 			}
 		}*/
+		anim.SetBool("lostPlayer", false);
 
 		if (CheckForPlayer()) {
             anim.SetBool("isRun", true);
             currState = AIState.Chase;
 			timer = 0; //used to check time since player was last spotted, along with time since chase stopped (no need to have two timers)
 		} else {
-            anim.SetBool("isRun", false);
             timer += Time.deltaTime;
 		}
 
@@ -98,6 +98,9 @@ public class JuniorGuardAI : MonoBehaviour {
 			case AIState.Patrol:
 				if (agent.remainingDistance < .5f && !agent.pathPending) {
 					atWaypoint = true;
+					agent.Stop();
+					agent.ResetPath();
+					anim.SetBool("isWaiting", true);
 				}
 				if (atWaypoint) {
 					patrolTimer += Time.deltaTime;
@@ -105,13 +108,14 @@ public class JuniorGuardAI : MonoBehaviour {
 						setNextWaypoint();
 						patrolTimer = 0;
 						atWaypoint = false;
+						anim.SetBool("isWaiting", false);
 					}
 				}
 				break;
 
 			case AIState.Chase:
 				agent.SetDestination(player.transform.position); //change "Player" name as appropriate
-				if (agent.remainingDistance < 1f && !agent.pathPending) {
+				if (agent.remainingDistance < 1.5f && !agent.pathPending) {
 					//TODO: attack
 					//print("there will eventually have been an attack here");
                     anim.SetBool("isAttack", true);
@@ -121,6 +125,7 @@ public class JuniorGuardAI : MonoBehaviour {
                 }
 				if (timer >= 1) {
 					currState = AIState.LoseTarget;
+					anim.SetBool("isRun", false);
 					timer = 0;
 				}
 				break;
@@ -131,6 +136,7 @@ public class JuniorGuardAI : MonoBehaviour {
 				//TODO: loop through confused animation
 				if (timer >= 3) {
 					currState = AIState.WalkBack;
+					anim.SetBool("lostPlayer", true);
 				}
 				break;
 
@@ -204,6 +210,10 @@ public class JuniorGuardAI : MonoBehaviour {
     {
     	if (collision.collider.tag == "Cube" || (collision.collider.name == "End" && collision.collider.GetComponent<Animator>().GetBool("Out") == true)) {
 			knockedOut = true;
+			agent.Stop();
+			agent.ResetPath();
+			anim.SetBool("knockedOut", true);
+			Destroy(gameObject);
     	}
     }
 }

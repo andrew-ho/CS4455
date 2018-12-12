@@ -41,7 +41,7 @@ public class room2GuideTextTrigger : MonoBehaviour {
         else if (box.name == "roomGuideBox5")
         {
             guideText.text = "That platform is moving too fast to walk across. " +
-                "\n Swap to your Pause ability and press E while facing it to temporarily pause it." +
+                "\n Swap to your Pause ability and press F while facing it to temporarily pause it." +
                 "\n You can freeze moving objects for five seconds before they start moving again.";
         }
         else if (box.name == "roomGuideBox6")

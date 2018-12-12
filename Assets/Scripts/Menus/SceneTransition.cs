@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneTransition : MonoBehaviour {
-    public string level;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    public void OnClick()
+public class SceneTransition : MonoBehaviour
+{
+    public static string prev = null;
+    public void StartGame()
     {
-        SceneManager.LoadScene(level);
+        Scene curr_Scene = SceneManager.GetActiveScene();
+        if (curr_Scene.name == "Final_Level_0")
+        {
+            //GameObject camera = GameObject.Find("PauseCamera");
+            //camera.SetActive(false);
+            SceneManager.LoadScene("Final_Level_1");
+        }
+        else if (curr_Scene.name == "Final_Level_1")
+        {
+            SceneManager.LoadScene("CongratScene");
+        }
+
     }
 }

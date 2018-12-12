@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CanvasGroup))]
 
@@ -25,10 +26,12 @@ public class RentAGuardAI : MonoBehaviour {
 	private Quaternion initRot;
 
 	private bool gameOver = false;
+	private bool knockedOut = true;
 
     private Animator anim;
     private Animator playerAnim;
     CanvasGroup canvasGroup;
+    //GameObject GameOverMenu;
 
     public enum AIState
 	{
@@ -44,6 +47,8 @@ public class RentAGuardAI : MonoBehaviour {
     {
         canvasGroup = GameObject.Find("GameOverCanvas").GetComponent<CanvasGroup>();
         HideGameOverMenu();
+        //GameOverMenu = GameObject.Find("GameOverMenu");
+        //GameOverMenu.SetActive(false);
     }
 
     // Use this for initialization
@@ -56,15 +61,15 @@ public class RentAGuardAI : MonoBehaviour {
 
         player = GameObject.FindWithTag("Player");
         playerAnim = player.GetComponent<Animator>();
-        anim = GameObject.Find("Rent_A_Guard").GetComponent<Animator>();
+        anim = this.gameObject.GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-		if (gameOver) {
+		if (gameOver || knockedOut) {
 			return;
 		}
-		if (Input.GetKeyDown(KeyCode.F)) {
+		/*if (Input.GetKeyDown(KeyCode.F)) {
 			Freeze();
 		}
 		if (isFrozen) {
@@ -78,7 +83,7 @@ public class RentAGuardAI : MonoBehaviour {
 			} else {
 				return;
 			}
-		}
+		}*/
 
 		if (CheckForPlayer()) {
             anim.SetBool("isRun", true);
@@ -108,7 +113,7 @@ public class RentAGuardAI : MonoBehaviour {
                     //gameOver = true;
                     anim.SetBool("isAttack", true);
                     playerAnim.SetBool("isDeath", true);
-                    print("there will eventually have been an attack here");
+                    //print("there will eventually have been an attack here");
                     StartCoroutine(ShowGameOverMenu());
                 }
 				if (timer >= 1) {
@@ -152,13 +157,13 @@ public class RentAGuardAI : MonoBehaviour {
 		}
 	}
 
-	public void Freeze() {
+	/*public void Freeze() {
 		preFrozenVel = agent.velocity;
 		isFrozen = true;
 		agent.Stop();
 		agent.velocity = Vector3.zero;
 		// rb.constraints = RigidbodyConstraints.FreezeAll;
-	}
+	}*/
 
 	bool CheckForPlayer() {
 		distVec = player.transform.position - transform.position;
@@ -170,6 +175,13 @@ public class RentAGuardAI : MonoBehaviour {
     IEnumerator ShowGameOverMenu()
     {
         yield return new WaitForSeconds(3f);
+
+        //GameOverMenu.SetActive(true);
+
+        //GameStart.prev = SceneManager.GetActiveScene().name;
+        //SceneManager.LoadScene("GameOverScene");
+        //SceneManager.LoadScene("GameOverScene");
+
         Cursor.lockState = CursorLockMode.None;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
@@ -184,5 +196,12 @@ public class RentAGuardAI : MonoBehaviour {
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0f;
         Time.timeScale = 1f;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+    	if (collision.collider.tag == "Cube" || (collision.collider.name == "End" && collision.collider.GetComponent<Animator>().GetBool("Out") == true)) {
+			knockedOut = true;
+    	}
     }
 }

@@ -10,6 +10,8 @@ public class JuniorGuardAI : MonoBehaviour {
     public float freezeTimer = 0f;
     private Vector3 preFrozenVel;
     // private Rigidbody rb;
+    private float patrolTimer = 0f;
+    private bool atWaypoint = false;
 
 	public UnityEngine.AI.NavMeshAgent agent;
 	private GameObject player;
@@ -22,6 +24,8 @@ public class JuniorGuardAI : MonoBehaviour {
 	private float timer = 0;
 	private Vector3 initPos;
 	private Quaternion initRot;
+
+	private bool knockedOut = true;
 
     public Animator anim;
     public Animator playerAnim;
@@ -57,12 +61,15 @@ public class JuniorGuardAI : MonoBehaviour {
 
         player = GameObject.FindWithTag("Player");
         playerAnim = player.GetComponent<Animator>();
-        anim = GameObject.Find("Junior_Guard").GetComponent<Animator>();
+        anim = this.gameObject.GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.F)) {
+		if (knockedOut) {
+			return;
+		}
+		/*if (Input.GetKeyDown(KeyCode.F)) {
 			Freeze();
 		}
 		if (isFrozen) {
@@ -76,7 +83,7 @@ public class JuniorGuardAI : MonoBehaviour {
 			} else {
 				return;
 			}
-		}
+		}*/
 
 		if (CheckForPlayer()) {
             anim.SetBool("isRun", true);
@@ -90,7 +97,15 @@ public class JuniorGuardAI : MonoBehaviour {
 		switch (currState) {
 			case AIState.Patrol:
 				if (agent.remainingDistance < .5f && !agent.pathPending) {
-					setNextWaypoint();
+					atWaypoint = true;
+				}
+				if (atWaypoint) {
+					patrolTimer += Time.deltaTime;
+					if (patrolTimer > 2) {
+						setNextWaypoint();
+						patrolTimer = 0;
+						atWaypoint = false;
+					}
 				}
 				break;
 
@@ -98,10 +113,10 @@ public class JuniorGuardAI : MonoBehaviour {
 				agent.SetDestination(player.transform.position); //change "Player" name as appropriate
 				if (agent.remainingDistance < 1f && !agent.pathPending) {
 					//TODO: attack
-					print("there will eventually have been an attack here");
+					//print("there will eventually have been an attack here");
                     anim.SetBool("isAttack", true);
                     playerAnim.SetBool("isDeath", true);
-                    print("there will eventually have been an attack here");
+                    //print("there will eventually have been an attack here");
                     StartCoroutine(ShowGameOverMenu());
                 }
 				if (timer >= 1) {
@@ -142,13 +157,13 @@ public class JuniorGuardAI : MonoBehaviour {
 		}
 	}
 
-	public void Freeze() {
+	/*public void Freeze() {
 		preFrozenVel = agent.velocity;
 		isFrozen = true;
 		agent.Stop();
 		agent.velocity = Vector3.zero;
 		// rb.constraints = RigidbodyConstraints.FreezeAll;
-	}
+	}*/
 
 	bool CheckForPlayer() {
 		distVec = player.transform.position - transform.position;
@@ -183,5 +198,12 @@ public class JuniorGuardAI : MonoBehaviour {
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0f;
         Time.timeScale = 1f;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+    	if (collision.collider.tag == "Cube" || (collision.collider.name == "End" && collision.collider.GetComponent<Animator>().GetBool("Out") == true)) {
+			knockedOut = true;
+    	}
     }
 }

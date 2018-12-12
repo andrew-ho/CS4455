@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obstacle
   - Cube
+  - Goal
   layers:
   - Default
   - TransparentFX
@@ -17,10 +18,10 @@ TagManager:
   - 
   - Player
   - Obstacle
-  - 
-  - 
-  - 
-  - 
+  - Goal
+  - Boulder Spawner
+  - Junior_Guard
+  - box1
   - 
   - 
   - 

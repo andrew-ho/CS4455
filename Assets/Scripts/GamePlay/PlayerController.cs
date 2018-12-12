@@ -54,7 +54,51 @@ public class PlayerController : MonoBehaviour
         //Movement();
         Powers();
 
+<<<<<<< HEAD
+=======
+        if (this.transform.position.y < -21) {
+        	CanvasGroup canvasGroup = GameObject.Find("GameOverCanvas").GetComponent<CanvasGroup>();
+        	Cursor.lockState = CursorLockMode.None;
+	        canvasGroup.interactable = true;
+	        canvasGroup.blocksRaycasts = true;
+	        canvasGroup.alpha = 1f;
+	        Time.timeScale = 0f;
+        }
+>>>>>>> 2caca16cfe8e4ab735d43399b54c16a078c47103
     }
+
+    //public void Movement() {
+    //    if (Input.GetKey(KeyCode.W))
+    //    {
+    //        anim.SetBool("walk", true);
+    //        transform.position += Vector3.forward * Time.deltaTime * movementSpeed;
+    //    }
+    //    else if (Input.GetKey(KeyCode.S))
+    //    {
+    //        anim.SetBool("walk", true);
+    //        transform.position += Vector3.back * Time.deltaTime * movementSpeed;
+    //    }
+    //    else if (Input.GetKey(KeyCode.A))
+    //    {
+    //        anim.SetBool("walk", true);
+    //        transform.position += Vector3.left * Time.deltaTime * movementSpeed;
+    //    }
+    //    else if (Input.GetKey(KeyCode.D))
+    //    {
+    //        anim.SetBool("walk", true);
+    //        transform.position += Vector3.right * Time.deltaTime * movementSpeed;
+    //    } else {
+    //        anim.SetBool("walk", false);
+    //    }
+
+    //    if (Input.GetKey(KeyCode.Space)) {
+    //        anim.SetBool("jump", true);
+    //        //transform.position = new Vector3(transform.position.x, playerJumpHeight, transform.position.z);
+    //        transform.position += new Vector3(0, playerJumpHeight, 0);
+    //    } else {
+    //        anim.SetBool("jump", false);
+    //    }
+    //}
     public void Powers()
     {
         if (carriedObject == null)
@@ -199,6 +243,28 @@ public class PlayerController : MonoBehaviour
                     otherRb.AddForce(transform.forward * 1000000);
                 }
             }
+            else if (hit.collider.gameObject.name == "Red Press Button 1" && GameObject.Find("Cylinder 1").GetComponent<Animator>().GetBool("Out") == false) {
+            	if (Input.GetMouseButtonDown(0)) {
+            		GameObject.Find("Cylinder 1").GetComponent<Animator>().SetBool("Out", true);
+            		StartCoroutine(BringPistonIn());
+            	}
+            }
+            else if (hit.collider.gameObject.name == "Red Press Button 2" && GameObject.Find("Cylinder 1").GetComponent<Animator>().GetBool("Out") == false) {
+            	if (Input.GetMouseButtonDown(0)) {
+            		GameObject.Find("Cylinder 2").GetComponent<Animator>().SetBool("Out", true);
+            		StartCoroutine(BringPistonIn());
+            	}
+            }
         }
     }
+<<<<<<< HEAD
 }
+=======
+
+    IEnumerator BringPistonIn() {
+    	yield return new WaitForSeconds(.1f);
+    	GameObject.Find("Cylinder 1").GetComponent<Animator>().SetBool("Out", false);
+    	GameObject.Find("Cylinder 2").GetComponent<Animator>().SetBool("Out", false);
+    }
+}
+>>>>>>> 2caca16cfe8e4ab735d43399b54c16a078c47103

@@ -17,15 +17,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Level_02.unity
     guid: 25a89f448df9647e6bd106964b25f3c5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Tutorial.unity
     guid: e4ea2d4f0d194db4f8a465a76304dbfb
   - enabled: 1
-    path: Assets/Scenes/Final_Level_1.unity
-    guid: b7b24d3a68c4c4140b6826e6e16327b4
-  - enabled: 1
     path: Assets/Scenes/Final_Level_0.unity
     guid: 7b17cf23a9a3fd047b33cf8b65ca5aa4
+  - enabled: 1
+    path: Assets/Scenes/Final_Level_1.unity
+    guid: b7b24d3a68c4c4140b6826e6e16327b4
   - enabled: 1
     path: Assets/Scenes/GameOverScene.unity
     guid: f1261655fcdd2409fb6641649eec5982

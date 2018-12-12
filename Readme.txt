@@ -1,4 +1,4 @@
-INSTRUCTIONS
+﻿INSTRUCTIONS
 - Get to the end of the room while avoiding or defeating enemies.
 - Sneak around and don't let anyone see you.
 - Use your environment to overcome puzzles and deal with enemies.
@@ -88,7 +88,7 @@ Contribution: Player Controller, Adding sound effect, player power features, cam
 =====================
 name: Jacob Light
 email: tlight6@gatech.edu
-OIT: bpham31
+OIT: tlight6
 Contribution: Game AI, game levels logic, some menu,level design ideas, create scenes, enemy models, adding missing arts,analysis of playtesting results, presenting presentation materials
 =====================
 name: An Truong

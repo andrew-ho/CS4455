@@ -20,12 +20,15 @@ public class PlayerMove : MonoBehaviour
     Vector3 m_GroundNormal;
     float m_GroundCheckDistance = 0.7f;
     bool m_IsGrounded;
+    CapsuleCollider capsuleCollider;
+
 
     // Use this for initialization
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
@@ -128,6 +131,18 @@ public class PlayerMove : MonoBehaviour
             anim.SetBool("isJump", false);
             // m_Animator.applyRootMotion = false;
             anim.applyRootMotion = false;
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.collider.gameObject.tag == "Level")
+        {
+            //m_GroundNormal = hitInfo.normal;
+            m_IsGrounded = true;
+            isGrounded = m_IsGrounded;
+            //   m_Animator.applyRootMotion = true;
+            anim.applyRootMotion = true;
         }
     }
 }

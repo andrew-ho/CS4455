@@ -20,21 +20,18 @@ public class PlayerMove : MonoBehaviour
     Vector3 m_GroundNormal;
     float m_GroundCheckDistance = 0.7f;
     bool m_IsGrounded;
-    CapsuleCollider capsuleCollider;
-
 
     // Use this for initialization
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        PowerAnim();
         InputMagnitude();
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
@@ -59,6 +56,52 @@ public class PlayerMove : MonoBehaviour
         moveVector = new Vector3(0, verticalVel, 0);
         //rb.AddForce(desiredMoveDirection * 10);
         
+    }
+
+    void PowerAnim() {
+        if (Input.GetKey(KeyCode.Alpha1))
+        {
+            anim.speed = .5f;
+        }
+        else if (Input.GetKey(KeyCode.Alpha2))
+        {
+            anim.speed = 1f;
+        }
+        else if (Input.GetKey(KeyCode.Alpha3))
+        {
+            anim.speed = 2f;
+        }
+        else
+        {
+            anim.speed = 1f;
+        }
+
+        if (Input.GetKey(KeyCode.F))
+        {
+            anim.SetBool("isFreeze", true);
+        }
+        else
+        {
+            anim.SetBool("isFreeze", false);
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            anim.SetBool("isPush", true);
+        }
+        else
+        {
+            anim.SetBool("isPush", false);
+        }
+
+        if (Input.GetKey(KeyCode.E))
+        {
+            anim.SetBool("isPull", true);
+        }
+        else
+        {
+            anim.SetBool("isPull", false);
+        }
     }
 
     void PlayerMoveAndRotation()
@@ -131,18 +174,6 @@ public class PlayerMove : MonoBehaviour
             anim.SetBool("isJump", false);
             // m_Animator.applyRootMotion = false;
             anim.applyRootMotion = false;
-        }
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.collider.gameObject.tag == "Level")
-        {
-            //m_GroundNormal = hitInfo.normal;
-            m_IsGrounded = true;
-            isGrounded = m_IsGrounded;
-            //   m_Animator.applyRootMotion = true;
-            anim.applyRootMotion = true;
         }
     }
 }

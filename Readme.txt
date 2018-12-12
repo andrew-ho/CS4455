@@ -87,7 +87,7 @@ OIT: aho44
 Contribution: Player Controller, Adding sound effect, player power features, camera,Adding objects to the scenes, polishing the Pause tool, adding missing arts, level design ideas,analysis of playtesting results, creating presentation materials, internal playtesting/QA
 =====================
 name: Jacob Light
-email: bangpham@gatech.edu
+email: tlight6@gatech.edu
 OIT: bpham31
 Contribution: Game AI, game levels logic, some menu,level design ideas, create scenes, enemy models, adding missing arts,analysis of playtesting results, presenting presentation materials
 =====================

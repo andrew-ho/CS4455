@@ -305,6 +305,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4765740663705382}
+  - component: {fileID: 136538487976899412}
   m_Layer: 8
   m_Name: foot_r
   m_TagString: Untagged
@@ -725,6 +726,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4028322532979086}
+  - component: {fileID: 136545724781765642}
   m_Layer: 8
   m_Name: foot_l
   m_TagString: Untagged
@@ -1923,13 +1925,39 @@ CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1998348503160526}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 1991634411cfbde4cb1093257f8f5a13, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1.8643315
+  m_Height: 1.7904563
   m_Direction: 1
-  m_Center: {x: 0, y: 0.90583694, z: 0}
+  m_Center: {x: 0, y: 0.94277453, z: 0}
+--- !u!136 &136538487976899412
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1326035833948254}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.045436297
+  m_Height: 0.29334456
+  m_Direction: 1
+  m_Center: {x: -0.07775749, y: 0.07773462, z: 0.00000001559198}
+--- !u!136 &136545724781765642
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1808937358867806}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.037933744
+  m_Height: 0.30129918
+  m_Direction: 1
+  m_Center: {x: 0.08803831, y: -0.070176005, z: -0.000000021026556}
 --- !u!137 &137161573977433600
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

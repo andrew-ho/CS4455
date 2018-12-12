@@ -113,7 +113,7 @@ public class RentAGuardAI : MonoBehaviour {
                     //GameObject.Find("PauseCanvas").GetComponent<PauseMenu>().ShowPauseMenu();
                     //gameOver = true;
                     anim.SetBool("isAttack", true);
-                    playerAnim.SetBool("isDeath", true);
+                    //playerAnim.SetBool("isDeath", true);
                     //print("there will eventually have been an attack here");
                     StartCoroutine(ShowGameOverMenu());
                 }
@@ -177,7 +177,7 @@ public class RentAGuardAI : MonoBehaviour {
 
     IEnumerator ShowGameOverMenu()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
         //GameOverMenu.SetActive(true);
 

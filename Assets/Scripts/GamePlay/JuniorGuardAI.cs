@@ -119,7 +119,7 @@ public class JuniorGuardAI : MonoBehaviour {
 					//TODO: attack
 					//print("there will eventually have been an attack here");
                     anim.SetBool("isAttack", true);
-                    playerAnim.SetBool("isDeath", true);
+                    //playerAnim.SetBool("isDeath", true);
                     //print("there will eventually have been an attack here");
                     StartCoroutine(ShowGameOverMenu());
                 }
@@ -189,7 +189,7 @@ public class JuniorGuardAI : MonoBehaviour {
 
     IEnumerator ShowGameOverMenu()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         Cursor.lockState = CursorLockMode.None;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;

@@ -89,7 +89,7 @@ OUTSIDE SOURCES:
 Music is from Kevin MacLeod (incompetech.com)
 Camera is from Invector
 Humanoid animations are from Mixamo
-Textures are from various sources
+Textures and models are from various sources
 
 =====================
 
@@ -108,7 +108,7 @@ Contribution: Player Controller, Adding sound effect, player power features, cam
 name: Jacob Light
 email: tlight6@gatech.edu
 OIT: tlight6
-Contribution: Game AI, game levels logic, some menu,level design ideas, create scenes, enemy models, adding missing arts,analysis of playtesting results, presenting presentation materials
+Contribution: Game AI, game levels logic, some menu, level design ideas, create scenes, enemy models, adding missing arts, analysis of playtesting results, presenting presentation materials
 =====================
 name: An Truong
 email: atruong32@gatech.edu

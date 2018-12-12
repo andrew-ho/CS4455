@@ -96,7 +96,7 @@ email: atruong32@gatech.edu
 OIT: atruong32
 Contribution: Game Menu,Adding animations for player and enemies, Adding objects to the scenes, polishing menus, adding missing arts, analysis of playtesting results, deliverables created on time, bookkeeping
 =====================
-name: Quyen Do
+name: Quyen Tran
 email: btran1002@gatech.edu
 OIT: btran34
 Contribution: Game Menu, Adding animations for player and enemies level design ideas, Adding objects to the scenes, polishing menus, adding missing arts,analysis of playtesting results, deliverables created on time, bookkeeping

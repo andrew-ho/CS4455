@@ -60,6 +60,7 @@ public class RentAGuardAI : MonoBehaviour {
 		initRot = transform.rotation;
 
         player = GameObject.FindWithTag("Player");
+        Debug.Log(player);
         playerAnim = player.GetComponent<Animator>();
         anim = this.gameObject.GetComponent<Animator>();
     }

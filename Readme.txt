@@ -72,6 +72,19 @@ Well done! One more thing: there may be enemy guards that chase you if you enter
     - The goal is straight ahead. Maybe a green, glowy spot on the ground that you walk onto?
 =====================
 
+Bugs fixed/updated/TODO:
+- Player Collider getting stuck on edge
+- Knock out guards by hitting them with an obstacle
+
+=====================
+
+SCENES:
+GameMenu
+Final_Level_0
+Final_Level_1
+
+=====================
+
 OUTSIDE SOURCES:
 Music is from Kevin MacLeod (incompetech.com)
 Camera is from Invector

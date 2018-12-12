@@ -26,7 +26,7 @@ public class RentAGuardAI : MonoBehaviour {
 	private Quaternion initRot;
 
 	private bool gameOver = false;
-	private bool knockedOut = true;
+	public bool knockedOut = false;
 
     private Animator anim;
     private Animator playerAnim;
@@ -97,15 +97,15 @@ public class RentAGuardAI : MonoBehaviour {
 			case AIState.InitState:
 				initPos.y = transform.position.y;
 				currState = AIState.Stationary;
+				anim.SetBool("isWaiting", true);
 				break;
 
 			case AIState.Stationary:
-				//TODO: loop through idle animation
 				break;
 
 			case AIState.Chase:
 				agent.SetDestination(player.transform.position); //change "Player" name as appropriate
-				if (agent.remainingDistance < 1f && !agent.pathPending) {
+				if (agent.remainingDistance < 1.5f && !agent.pathPending) {
                     //TODO: attack
                     //print("there will eventually have been an attack here");
                     //Time.timeScale = 0f;
@@ -129,6 +129,7 @@ public class RentAGuardAI : MonoBehaviour {
 				if (timer >= 3) {
 					walkingBackDestSet = false;
 					currState = AIState.WalkBack;
+					anim.SetBool("lostPlayer", true);
 				}
 				break;
 
@@ -149,6 +150,7 @@ public class RentAGuardAI : MonoBehaviour {
 					agent.ResetPath();
 					walkingBackDestSet = false;
 					currState = AIState.Stationary;
+					anim.SetBool("isWaiting", true);
 				}
 				break;
 
@@ -202,6 +204,10 @@ public class RentAGuardAI : MonoBehaviour {
     {
     	if (collision.collider.tag == "Cube" || (collision.collider.name == "End" && collision.collider.GetComponent<Animator>().GetBool("Out") == true)) {
 			knockedOut = true;
+			agent.Stop();
+			agent.ResetPath();
+			anim.SetBool("knockedOut", true);
+			Destroy(gameObject);
     	}
     }
 }

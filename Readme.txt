@@ -72,7 +72,13 @@ Well done! One more thing: there may be enemy guards that chase you if you enter
     - The goal is straight ahead. Maybe a green, glowy spot on the ground that you walk onto?
 =====================
 
+OUTSIDE SOURCES:
+Music is from Kevin MacLeod (incompetech.com)
+Camera is from Invector
+Humanoid animations are from Mixamo
+Textures are from various sources
 
+=====================
 
 TEAM MEMBERS
 =====================

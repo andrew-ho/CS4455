@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     GameObject carriedObject;
     Image im;
     public static GameObject frozenObject;
+    public static GameObject theObject;
     public Texture2D crosshairImage;
     public Sprite[] sprites;
     int currentPower = 0;
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
     float m_GroundCheckDistance = 0.1f;
     public float movementSpeed = 5.0f;
     public float playerJumpHeight = .1f;
+    SoundsHolder holder;
+    AudioSource audio;
 
     public enum powerSwitch
     {
@@ -36,6 +39,9 @@ public class PlayerController : MonoBehaviour
     public powerSwitch power;
     void Start()
     {
+        holder = GameObject.Find("Sounds").GetComponent<SoundsHolder>();
+        audio = holder.GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
         power = powerSwitch.Freeze;
         cam = GameObject.Find("vThirdPersonController").GetComponent<Camera>();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -53,7 +59,16 @@ public class PlayerController : MonoBehaviour
     {
         //Movement();
         Powers();
-
+        /*if (anim.GetCurrentAnimatorStateInfo(0).IsName("Push") || anim.GetCurrentAnimatorStateInfo(0).IsName("Pull")
+            || anim.GetCurrentAnimatorStateInfo(0).IsName("Freeze"))
+        {
+            anim.applyRootMotion = false;
+            // Avoid any reload.
+        }
+        else
+        {
+            anim.applyRootMotion = true;
+        }*/
 
         if (this.transform.position.y < -21) {
         	CanvasGroup canvasGroup = GameObject.Find("GameOverCanvas").GetComponent<CanvasGroup>();
@@ -120,12 +135,36 @@ public class PlayerController : MonoBehaviour
             ObjectFreeze freeze = hit.collider.gameObject.GetComponent<ObjectFreeze>();
             if (freeze != null)
             {
-                if (frozenObject == null)
+                theObject = hit.collider.gameObject;
+                theObject.GetComponent<Renderer>().material.color = Color.yellow;
+                Transform[] list = theObject.GetComponentsInChildren<Transform>();
+                foreach (Transform child in list)
                 {
+                    child.gameObject.GetComponent<Renderer>().material.color = Color.yellow;
+                }
+                if (frozenObject == null)
+                {                   
                     if (Input.GetKeyDown(KeyCode.F))
                     {
+                        audio.clip = holder.sources[2];
+                        audio.Play();
+                        anim.SetTrigger("freeze");
                         freeze.StopObject();
                     }
+                }
+            }
+            else
+            {
+                if (theObject != null)
+                {
+                    theObject.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 255);
+                    theObject.GetComponent<Renderer>().material.color = Color.yellow;
+                    Transform[] list = theObject.GetComponentsInChildren<Transform>();
+                    foreach (Transform child in list)
+                    {
+                        child.gameObject.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 255);
+                    }
+                    theObject = null;
                 }
             }
         }
@@ -137,7 +176,41 @@ public class PlayerController : MonoBehaviour
         int y = Screen.height / 2;
         Ray ray = cam.ScreenPointToRay(new Vector3(x, y));
         RaycastHit hit;
-        if (Input.GetKeyDown(KeyCode.E) && carriedObject == null)
+        if (carriedObject == null) {
+            if (Physics.Raycast(ray, out hit, 100f, ~(1 << 8)))
+            {
+                if (Physics.Raycast(ray, out hit, 100f, ~(1 << 8)))
+                {
+                    //Debug.Log(hit.collider.gameObject);
+                    Magnet magnet = hit.collider.gameObject.GetComponent<Magnet>();
+                    if (magnet != null)
+                    {
+                        theObject = hit.collider.gameObject;
+                        theObject.GetComponent<Renderer>().material.color = Color.yellow;
+                        if (Input.GetKeyDown(KeyCode.E) && carriedObject == null)
+                        {
+                            if (!magnet.isHolding)
+                            {
+                                audio.clip = holder.sources[1];
+                                audio.Play();
+                                anim.SetTrigger("pull");
+                                magnet.isHolding = true;
+                                carriedObject = hit.collider.gameObject;
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        if (theObject != null)
+                        {
+                            theObject.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 255);
+                            theObject = null;
+                        }
+                    }
+                }
+            }
+        /*if (Input.GetKeyDown(KeyCode.E) && carriedObject == null)
         {
             Debug.Log("shit");
             if (Physics.Raycast(ray, out hit, 100f, ~(1 << 8)))
@@ -146,7 +219,8 @@ public class PlayerController : MonoBehaviour
                 Magnet magnet = hit.collider.gameObject.GetComponent<Magnet>();
                 if (magnet != null)
                 {
-
+                    theObject = hit.collider.gameObject;
+                    theObject.GetComponent<Renderer>().material.color = Color.yellow;
                     if (!magnet.isHolding)
                     {
                         magnet.isHolding = true;
@@ -154,11 +228,19 @@ public class PlayerController : MonoBehaviour
                     }
 
                 }
+                else
+                {
+                    if (theObject != null)
+                    {
+                        theObject.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 255);
+                        theObject = null;
+                    }
+                }
             }
             else
             {
                 Debug.Log("hit nothing?");
-            }
+            }*/
 
         }
         else if (Input.GetKeyDown(KeyCode.E) && carriedObject != null)
@@ -166,8 +248,6 @@ public class PlayerController : MonoBehaviour
             carriedObject.GetComponent<Magnet>().isHolding = false;
             carriedObject = null;
         }
-        //carriedObject.transform.position = Vector3.Lerp(carriedObject.transform.position, new Vector3(player.transform.position.x, carriedObject.transform.position.y, 
-        //   carriedObject.transform.position.z - Input.GetAxis("Mouse ScrollWheel")), Time.deltaTime * 5f);
         else if (Input.GetAxis("Mouse ScrollWheel") > 0 && carriedObject != null)
         {
             float distance = Vector3.Distance(carriedObject.transform.position, player.transform.position);
@@ -199,6 +279,8 @@ public class PlayerController : MonoBehaviour
             Rigidbody otherRb = hit.collider.gameObject.GetComponent<Rigidbody>();
             if (otherRb != null)
             {
+                theObject = otherRb.gameObject;
+                theObject.GetComponent<Renderer>().material.color = Color.yellow;
                 Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector3 mouseDir = mousePos - gameObject.transform.position;
                 mouseDir.z = 0.0f;
@@ -207,20 +289,35 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     //otherRb.AddForce(-mouseDir * 100000);
+                    audio.clip = holder.sources[0];
+                    audio.Play();
+                    anim.SetTrigger("push");
                     otherRb.AddForce(transform.forward * 1000000);
                 }
             }
             else if (hit.collider.gameObject.name == "Red Press Button 1" && GameObject.Find("Cylinder 1").GetComponent<Animator>().GetBool("Out") == false) {
-            	if (Input.GetMouseButtonDown(0)) {
+                theObject = hit.collider.gameObject;
+                theObject.GetComponent<Renderer>().material.color = Color.yellow;
+                if (Input.GetMouseButtonDown(0)) {
             		GameObject.Find("Cylinder 1").GetComponent<Animator>().SetBool("Out", true);
             		StartCoroutine(BringPistonIn());
             	}
             }
             else if (hit.collider.gameObject.name == "Red Press Button 2" && GameObject.Find("Cylinder 1").GetComponent<Animator>().GetBool("Out") == false) {
-            	if (Input.GetMouseButtonDown(0)) {
+                theObject = hit.collider.gameObject;
+                theObject.GetComponent<Renderer>().material.color = Color.yellow;
+                if (Input.GetMouseButtonDown(0)) {
             		GameObject.Find("Cylinder 2").GetComponent<Animator>().SetBool("Out", true);
             		StartCoroutine(BringPistonIn());
             	}
+            }
+            else
+            {
+                if (theObject != null)
+                {
+                    theObject.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 255);
+                    theObject = null;
+                }
             }
         }
     }
@@ -230,6 +327,7 @@ public class PlayerController : MonoBehaviour
         GameObject.Find("Cylinder 1").GetComponent<Animator>().SetBool("Out", false);
         GameObject.Find("Cylinder 2").GetComponent<Animator>().SetBool("Out", false);
     }
+
 }
 
 
